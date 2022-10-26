@@ -19,7 +19,7 @@ def index():
 # add another route
 @app.route('/posts')
 def posts():
-    return 'Posts will eventually be on this page'
+    return render_template('posts.html')
 
 @app.route('/signup', methods = ["GET", "POST"])
 def signup():
@@ -33,6 +33,9 @@ def signup():
         print(email, username, password)
         # add a new user to the database
 
-        # redirect back to hoem
+        # flash a success message 
+        flash("You have successfully signed up!", "success")
+
+        # redirect back to home
         return redirect(url_for('index'))
     return render_template('signup.html', form = form)
