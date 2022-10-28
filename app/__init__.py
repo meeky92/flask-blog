@@ -1,24 +1,30 @@
-# import the flask class from the flask module
+# Import the Flask Class from the flask module
 from flask import Flask
-# import SQALCHEMY and Migrate
+# Import SQLAlchemy and Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from flask_login import LoginManager
 # import the Config class from the config module
 from config import Config
 
-# create an instance of the Flask class and give it the variable name 'app'
-app = Flask(__name__)
-# if templates folder named something else, can insert here after __name__, template_folder = 'abc'
 
-# add a SECRET_KEY to the app config
+# Create an instance of the Flask class - central object of the whole app
+app = Flask(__name__)
+# Configure the app using the Config class and the .from_object() method
 app.config.from_object(Config)
 
-# create an instance of SQLAlchemy to represent our database
+# Create an instance of SQLAlchemy to represent our database
 db = SQLAlchemy(app)
-
-# create an instance of migrate to represent our migration engine
+# Create an instance of Migrate to represent our migration engine
 migrate = Migrate(app, db)
+# render_as_batch = True for changing/adding columns sqlite
+# Create an instance of LoginManager to let our app allow login capabilities
 
-# import all the routes and models from the routes module in the current folder
+login = LoginManager(app)
+login.login_view = 'login'
+login.login_message_category = "danger"
+
+
+
+# import all of the routes and models from the routes and models module in the current folder
 from . import routes, models
