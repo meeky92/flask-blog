@@ -17,14 +17,16 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 # Create an instance of Migrate to represent our migration engine
 migrate = Migrate(app, db)
-# render_as_batch = True for changing/adding columns sqlite
 # Create an instance of LoginManager to let our app allow login capabilities
-
 login = LoginManager(app)
 login.login_view = 'login'
-login.login_message_category = "danger"
+login.login_message_category = 'danger'
 
-
+from app.blueprints.api import api
+app.register_blueprint(api)
 
 # import all of the routes and models from the routes and models module in the current folder
 from . import routes, models
+
+
+# app.config['SECRET_KEY'] = 'you-will-never-guess'

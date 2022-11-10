@@ -16,6 +16,6 @@ class LogInForm(FlaskForm):
     submit = SubmitField()
 
 class PostForm(FlaskForm):
-    title = StringField('Title', validators= [DataRequired()])
-    body = StringField('Body', validators= [DataRequired()])
-    submit = SubmitField
+    title = StringField('Title', validators=[DataRequired()])
+    body = StringField('Body', validators=[DataRequired()])
+    submit = SubmitField()
